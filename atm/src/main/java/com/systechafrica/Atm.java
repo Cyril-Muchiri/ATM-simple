@@ -8,6 +8,8 @@ public class Atm extends Thread {
 
     static double originalBalance = 1000;
     // static do newBalance;
+    static double newWithdrawCash;
+    static double withdrawCash;
 
     static int customerInput;
     static String suppliedPass;
@@ -40,6 +42,7 @@ public class Atm extends Thread {
             System.out.println("LOGIN SUCCESSFULL !!");
             displayMenu();
         } else {
+            
             count--;
             // if(count !=0){
             System.out.println("");
@@ -117,8 +120,8 @@ public class Atm extends Thread {
         System.out.println("Withrawbale balance : " + originalBalance+" ksh");
 
         System.out.println("Enter amaount : ");
-        double withdrawCash = scanner.nextDouble();
-        double newWithdrawCash = (1.02 * withdrawCash);
+         withdrawCash = scanner.nextDouble();
+         newWithdrawCash = (1.02 * withdrawCash);
 
         if (newWithdrawCash >= originalBalance) {
             System.out.println("Transaction failed due to insufficient balance!!");
@@ -129,11 +132,33 @@ public class Atm extends Thread {
             originalBalance -= newWithdrawCash;
 
             System.out.println("Processing withdrawal");
+            System.out.println("withdrwal of ksh : "+withdrawCash+" is successfull");
 
             Thread.sleep(4000);
-            checkBalance();
+            // checkBalance();
+            showReceipt();
         }
 
+    }
+
+    static void showReceipt() throws InterruptedException{
+          System.out.println("\n***********************");
+
+        System.out.println("ATM SIMULATOR");
+
+        System.out.println("**********************");
+
+        System.out.println("    Receipt\n");
+
+        System.out.println("CONFIRMED WITHDRAWAL OF: "+withdrawCash+" \n");
+
+        System.out.println("Transaction cost: " +((float)(newWithdrawCash-withdrawCash))+"\n");
+
+        System.out.println("Current balance : " + originalBalance + "\n");
+
+        Thread.sleep(4000);
+
+        displayMenu();
     }
 
     static void checkBalance() throws InterruptedException {
@@ -145,7 +170,7 @@ public class Atm extends Thread {
 
         System.out.println("    check balance\n");
 
-        System.out.println("Current balance : " + originalBalance + "\n");
+        System.out.println("Current balance : " + (float)originalBalance + "\n");
 
         System.out.println("Reverting back to main menu");
         Thread.sleep(5000);
