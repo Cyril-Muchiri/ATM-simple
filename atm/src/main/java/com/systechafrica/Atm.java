@@ -6,15 +6,15 @@ public class Atm extends Thread {
 
     static Scanner scanner = new Scanner(System.in);
 
-    static int originalBalance = 10001000;
-    static int newBalance ;
+    static double originalBalance = 1000;
+    // static do newBalance;
 
     static int customerInput;
     static String suppliedPass;
 
     static int count = 3;
 
-    static void startPrompts(int counter) throws InterruptedException  {
+    static void startPrompts(int counter) throws InterruptedException {
         if (counter > 0) {
             System.out.println("Enter customer number : ");
             customerInput = scanner.nextInt();
@@ -28,21 +28,21 @@ public class Atm extends Thread {
 
         } else {
             System.out.println("OOps!! Can't continue Maximum attempts reached");
-           
+
         }
 
     }
 
-    static void logIn(int customerNumber, String pass) throws InterruptedException  {
+    static void logIn(int customerNumber, String pass) throws InterruptedException {
 
         if (customerNumber == 10 && pass.equals("Admin123")) {
 
-         System.out.println("LOGIN SUCCESSFULL !!");
+            System.out.println("LOGIN SUCCESSFULL !!");
             displayMenu();
         } else {
             count--;
             // if(count !=0){
-                System.out.println("");
+            System.out.println("");
             System.out.println("INVALID CREDENTIALS!!");
             System.out.println(count + " attempts remaining!!");
             System.out.println("TRY AGAIN!!\n");
@@ -80,63 +80,113 @@ public class Atm extends Thread {
 
         System.out.println("___________________________");
 
-        int menuChoice =scanner.nextInt();
+        int menuChoice = scanner.nextInt();
         switch (menuChoice) {
             case 1:
                 checkBalance();
                 break;
-        case 2:
-        deposit();
-        break;
-         case 3:
-        withdraw();
-        break;
-         case 4:
-        transferCash();
-        break;
-         case 5:
-        quit();
-        break;
+            case 2:
+                deposit();
+                break;
+            case 3:
+                withdraw();
+                break;
+            case 4:
+                transferCash();
+                break;
+            case 5:
+                quit();
+                break;
             default:
-            System.out.println("invalid menu item,reverting back to menu");
-            Thread.sleep(2000);
-            displayMenu();
+                System.out.println("invalid menu item,reverting back to menu");
+                Thread.sleep(2000);
+                displayMenu();
                 break;
         }
 
+    }
 
+    static void withdraw() throws InterruptedException {
+
+        System.out.println("\n***********************");
+
+        System.out.println("ATM SIMULATOR");
+
+        System.out.println("**********************");
+        System.out.println("--------Cash Withdrwal--------\n");
+        System.out.println("Withrawbale balance : " + originalBalance+" ksh");
+
+        System.out.println("Enter amaount : ");
+        double withdrawCash = scanner.nextDouble();
+        double newWithdrawCash = (1.02 * withdrawCash);
+
+        if (newWithdrawCash >= originalBalance) {
+            System.out.println("Transaction failed due to insufficient balance!!");
+            System.out.println("ABORTING!!");
+            Thread.sleep(3000);
+            displayMenu();
+        } else {
+            originalBalance -= newWithdrawCash;
+
+            System.out.println("Processing withdrawal");
+
+            Thread.sleep(4000);
+            checkBalance();
+        }
 
     }
 
-    static void withdraw() {
-    }
-
-    static void checkBalance() {
-         System.out.println("\n***********************");
+    static void checkBalance() throws InterruptedException {
+        System.out.println("\n***********************");
 
         System.out.println("ATM SIMULATOR");
 
         System.out.println("**********************");
 
-        System.out.println("ATM SERVICES");
+        System.out.println("    check balance\n");
 
-        System.out.println("___________________________\n");
+        System.out.println("Current balance : " + originalBalance + "\n");
 
-        System.out.println("--------check balance--------");
-
-        System.out.println("Current balance : "+originalBalance);
-
-
-
+        System.out.println("Reverting back to main menu");
+        Thread.sleep(5000);
+        displayMenu();
 
     }
 
-    static void deposit() {
+    static void deposit() throws InterruptedException {
+        System.out.println("\n***********************");
+
+        System.out.println("ATM SIMULATOR");
+
+        System.out.println("**********************");
+        System.out.println("--------Cash Deposit--------\n");
+
+        System.out.println("Enter amaount : ");
+        double deposit = scanner.nextInt();
+        originalBalance += deposit;
+
+        System.out.println("Successfull deposit of : " + deposit + " ksh\n");
+
+        System.out.println("Procesing Balance");
+        Thread.sleep(3000);
+        checkBalance();
+
     }
 
-    static void transferCash() {
+    static void transferCash() throws InterruptedException {
+        System.out.println("Service unavailable !!");
+        Thread.sleep(2000);
+        displayMenu();
     }
-    static void quit(){
+
+    static void quit() {
+
+        System.out.println("Press any key to quit this session");
+        String key = scanner.next();
+
+        if (!key.isEmpty()) {
+            return;
+        }
 
     }
 
