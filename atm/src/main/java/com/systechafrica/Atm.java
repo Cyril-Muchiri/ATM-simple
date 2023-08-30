@@ -16,6 +16,7 @@ public class Atm extends Thread {
 
     static int count = 3;
 
+
     static void startPrompts(int counter) throws InterruptedException {
         if (counter > 0) {
             System.out.println("Enter customer number : ");
@@ -42,8 +43,9 @@ public class Atm extends Thread {
             System.out.println("LOGIN SUCCESSFULL !!");
             displayMenu();
         } else {
-            
+            //count 2
             count--;
+            //count 1
             // if(count !=0){
             System.out.println("");
             System.out.println("INVALID CREDENTIALS!!");
@@ -84,6 +86,7 @@ public class Atm extends Thread {
         System.out.println("___________________________");
 
         int menuChoice = scanner.nextInt();
+
         switch (menuChoice) {
             case 1:
                 checkBalance();
@@ -120,7 +123,9 @@ public class Atm extends Thread {
         System.out.println("Withrawbale balance : " + originalBalance+" ksh");
 
         System.out.println("Enter amaount : ");
+
          withdrawCash = scanner.nextDouble();
+         //2% ya transaction
          newWithdrawCash = (1.02 * withdrawCash);
 
         if (newWithdrawCash >= originalBalance) {
@@ -129,7 +134,7 @@ public class Atm extends Thread {
             Thread.sleep(3000);
             displayMenu();
         } else {
-            originalBalance -= newWithdrawCash;
+            originalBalance -= newWithdrawCash;//balacnce left
 
             System.out.println("Processing withdrawal");
             System.out.println("withdrwal of ksh : "+withdrawCash+" is successfull");
@@ -150,11 +155,11 @@ public class Atm extends Thread {
 
         System.out.println("    Receipt\n");
 
-        System.out.println("CONFIRMED WITHDRAWAL OF: "+withdrawCash+" \n");
+        System.out.println("CONFIRMED WITHDRAWAL OF: "+withdrawCash+" ksh\n");
 
-        System.out.println("Transaction cost: " +((float)(newWithdrawCash-withdrawCash))+"\n");
+        System.out.println("Transaction cost: " +((float)(newWithdrawCash-withdrawCash)+" ksh")+"\n");
 
-        System.out.println("Current balance : " + originalBalance + "\n");
+        System.out.println("Current balance : " + originalBalance + " ksh\n");
 
         Thread.sleep(4000);
 
@@ -170,7 +175,7 @@ public class Atm extends Thread {
 
         System.out.println("    check balance\n");
 
-        System.out.println("Current balance : " + (float)originalBalance + "\n");
+        System.out.println("Current balance : " + (float)originalBalance + " ksh \n");
 
         System.out.println("Reverting back to main menu");
         Thread.sleep(5000);
@@ -187,7 +192,9 @@ public class Atm extends Thread {
         System.out.println("--------Cash Deposit--------\n");
 
         System.out.println("Enter amaount : ");
-        double deposit = scanner.nextInt();
+
+        double deposit = scanner.nextDouble();
+
         originalBalance += deposit;
 
         System.out.println("Successfull deposit of : " + deposit + " ksh\n");
@@ -198,7 +205,7 @@ public class Atm extends Thread {
 
     }
 
-    static void transferCash() throws InterruptedException {
+    static void transferCash() throws InterruptedException  {
         System.out.println("Service unavailable !!");
         Thread.sleep(2000);
         displayMenu();
