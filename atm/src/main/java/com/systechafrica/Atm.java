@@ -42,6 +42,7 @@ public class Atm extends Thread {
 
             System.out.println("LOGIN SUCCESSFULL !!");
             Thread.sleep(3000);
+            
             displayMenu();
         } else {
             //count 2
