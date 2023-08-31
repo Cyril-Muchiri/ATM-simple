@@ -38,7 +38,7 @@ public class Atm extends Thread {
 
     static void logIn(int customerNumber, String pass) throws InterruptedException {
 
-        if (customerNumber == 10 && pass.equals("Admin123")) {
+        if (customerNumber == 10  && pass.equals("Admin123")) {
 
             System.out.println("LOGIN SUCCESSFULL !!");
             displayMenu();
@@ -231,6 +231,9 @@ public class Atm extends Thread {
         if (!cont.isEmpty()) {
 
             // logIn(customerInput, suppliedPass);
+            // member number = 10
+            // pass = Admin123
+        
             startPrompts(count);
 
         } else {

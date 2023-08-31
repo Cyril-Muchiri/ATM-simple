@@ -17,10 +17,14 @@ Assertions.assertNotNull(atm,"should fail if object is not created and is empty"
     }
 
     @Test
-    void loginThrows(){
+    void logins(){
         
         int expectedCustomerInput = 5;
         String expectedPass = "Admin444";
+
+        Assertions.(atm.logIn(expectedCustomerInput, expectedPass),atm.logIn(10, "Admin123"));
+
+        
        
 
 
