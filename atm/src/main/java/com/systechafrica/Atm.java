@@ -41,6 +41,7 @@ public class Atm extends Thread {
         if (customerNumber == 10  && pass.equals("Admin123")) {
 
             System.out.println("LOGIN SUCCESSFULL !!");
+            Thread.sleep(3000);
             displayMenu();
         } else {
             //count 2
